@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Expense Tracker</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #1d1d1d;
+            color: #283b34;
+        }
+
+        /* Main Dashboard */
+
+        .dashboard {
+            width: 95%;
+            max-width: 1100px;
+            margin: 38px auto;
+            background-color: #f7f9f7;
+            min-height: 738px;
+        }
+
+        /* Top Navigation */
+
+        .navbar {
+            height: 60px;
+            background-color: white;
+            border-bottom: 1px solid #e4e8e5;
+
+            display: flex;
+            align-items: center;
+            padding: 0 38px;
+        }
+
+        .logo {
+            width: 27px;
+            height: 27px;
+            background-color: #247a59;
+            color: white;
+
+            border-radius: 7px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 10px;
+            font-size: 15px;
+        }
+
+        .brand {
+            font-size: 13px;
+            margin-right: 55px;
+            color: #34423c;
+        }
+
+        .nav-item {
+            height: 60px;
+            display: flex;
+            align-items: center;
+
+            color: #18734f;
+            font-size: 12px;
+            font-weight: bold;
+
+            border-bottom: 2px solid #21845d;
+        }
+
+        .workspace {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            color: #777f7b;
+            font-size: 10px;
+        }
+
+        .profile {
+            width: 27px;
+            height: 27px;
+
+            border-radius: 50%;
+            background-color: #edf4ef;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #277153;
+            font-size: 9px;
+        }
+
+        /* Main Content */
+
+        .content {
+            padding: 34px 74px 20px;
+        }
+
+        .heading-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .heading h1 {
+            font-size: 27px;
+            font-weight: 500;
+            color: #294138;
+            margin-bottom: 6px;
+        }
+
+        .heading p {
+            color: #84908b;
+            font-size: 12px;
+        }
+
+        /* Month Button */
+
+        .month-button {
+            background-color: white;
+            border: 1px solid #dfe5e1;
+            border-radius: 7px;
+
+            padding: 10px 13px;
+
+            font-size: 11px;
+            color: #34433d;
+
+            min-width: 137px;
+            text-align: left;
+        }
+
+        .month-button span {
+            float: right;
+            color: #7e8b85;
+        }
+
+        /* Summary Cards */
+
+        .summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+
+            margin-top: 23px;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #dfe5e1;
+            border-radius: 10px;
+
+            min-height: 128px;
+            padding: 18px;
+        }
+
+        .total-card {
+            background-color: #edf7f1;
+            border-color: #d3e7dc;
+        }
+
+        .card-title {
+            display: flex;
+            justify-content: space-between;
+
+            color: #68756f;
+            font-size: 11px;
+
+            margin-bottom: 12px;
+        }
+
+        .total-card .card-title {
+            color: #18734f;
+        }
+
+        .card-icon {
+            font-size: 15px;
+        }
+
+        .amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #247c59;
+            margin-bottom: 6px;
+        }
+
+        .category-name {
+            font-size: 23px;
+            font-weight: bold;
+            color: #283a33;
+            margin-bottom: 6px;
+        }
+
+        .card-small {
+            font-size: 10px;
+            color: #7e8984;
+        }
+
+        /* Lower Section */
+
+        .lower-section {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 18px;
+
+            margin-top: 24px;
+        }
+
+        .panel {
+            background-color: white;
+            border: 1px solid #dfe5e1;
+            border-radius: 10px;
+
+            padding: 16px;
+        }
+
+        .panel-heading {
+            font-size: 16px;
+            font-weight: bold;
+            color: #293c34;
+            margin-bottom: 5px;
+        }
+
+        .panel-subtitle {
+            font-size: 10px;
+            color: #85908b;
+            margin-bottom: 20px;
+        }
+
+        /* Categories */
+
+        .category {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .category-icon {
+            width: 30px;
+            height: 30px;
+
+            background-color: #edf6f0;
+            color: #247b58;
+
+            border-radius: 7px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            margin-right: 10px;
+        }
+
+        .category-info {
+            flex: 1;
+        }
+
+        .category-name-small {
+            font-size: 11px;
+            color: #35443e;
+            margin-bottom: 4px;
+        }
+
+        .percentage {
+            font-size: 9px;
+            color: #88928e;
+        }
+
+        .category-amount {
+            font-size: 11px;
+            font-weight: bold;
+            color: #35433d;
+        }
+
+        .total-line {
+            border-top: 1px solid #e5e9e6;
+            margin-top: 8px;
+            padding-top: 14px;
+
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 10px;
+            color: #737e79;
+        }
+
+        .total-line strong {
+            color: #23805a;
+            font-size: 12px;
+        }
+
+        /* Transactions */
+
+        .transaction-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 5px;
+        }
+
+        .entries {
+            background-color: #f6f8f6;
+            border: 1px solid #e1e6e2;
+
+            padding: 4px 8px;
+            border-radius: 15px;
+
+            font-size: 9px;
+            color: #718079;
+        }
+
+        .transaction {
+            border: 1px solid #e1e6e2;
+            border-radius: 7px;
+
+            min-height: 49px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 7px 10px;
+
+            margin-bottom: 7px;
+        }
+
+        .transaction-icon {
+            width: 30px;
+            height: 30px;
+
+            background-color: #edf6f0;
+            color: #247b58;
+
+            border-radius: 7px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 10px;
+        }
+
+        .transaction-info {
+            flex: 1;
+        }
+
+        .transaction-name {
+            font-size: 11px;
+            color: #34443d;
+            margin-bottom: 4px;
+        }
+
+        .transaction-date {
+            font-size: 9px;
+            color: #89938f;
+        }
+
+        .transaction-amount {
+            font-size: 11px;
+            font-weight: bold;
+            color: #34443d;
+        }
+
+        /* Footer */
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 23px;
+
+            color: #89928e;
+            font-size: 9px;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 850px) {
+
+            .content {
+                padding: 25px;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+            }
+
+            .lower-section {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard {
+                width: 100%;
+                margin: 0;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .brand {
+                margin-right: 20px;
+            }
+
+            .workspace {
+                display: none;
+            }
+
+            .heading-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- NAVIGATION -->
+
+        <div class="navbar">
+
+            <div class="logo">▣</div>
+
+            <div class="brand">
+                Personal finance
+            </div>
+
+            <div class="nav-item">
+                Overview
+            </div>
+
+            <div class="workspace">
+
+                <span>My personal workspace</span>
+
+                <div class="profile">
+                    AS
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+            <!-- Heading -->
+
+            <div class="heading-row">
+
+                <div class="heading">
+
+                    <h1>My Expense Tracker</h1>
+
+                    <p>Track your monthly spending</p>
+
+                </div>
+
+                <button class="month-button">
+                    📅 &nbsp; October 2026
+                    <span>⌄</span>
+                </button>
+
+            </div>
+
+
+            <!-- SUMMARY CARDS -->
+
+            <div class="summary">
+
+
+                <!-- Total Spent -->
+
+                <div class="card total-card">
+
+                    <div class="card-title">
+
+                        <span>Total Spent</span>
+
+                        <span class="card-icon">▣</span>
+
+                    </div>
+
+                    <div class="amount">
+                        ₹18,450.00
+                    </div>
+
+                    <div class="card-small">
+                        Across 4 expense categories
+                    </div>
+
+                </div>
+
+
+                <!-- Highest Category -->
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        <span>Highest Category</span>
+
+                        <span class="card-icon">🍴</span>
+
+                    </div>
+
+                    <div class="category-name">
+                        Food
+                    </div>
+
+                    <div class="card-small">
+                        ₹7,250.00 · 39.3% of total spending
+                    </div>
+
+                </div>
+
+
+                <!-- Current Month -->
+
+                <div class="card">
+
+                    <div class="card-title">
+
+                        <span>Current Month</span>
+
+                        <span class="card-icon">▦</span>
+
+                    </div>
+
+                    <div class="category-name">
+                        October 2026
+                    </div>
+
+                    <div class="card-small">
+                        Monthly overview · 1–31 October
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOWER SECTION -->
+
+            <div class="lower-section">
+
+
+                <!-- EXPENSE CATEGORIES -->
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        Expense Categories
+                    </div>
+
+                    <div class="panel-subtitle">
+                        Where your money went this month
+                    </div>
+
+
+                    <!-- Food -->
+
+                    <div class="category">
+
+                        <div class="category-icon">
+                            🍴
+                        </div>
+
+                        <div class="category-info">
+
+                            <div class="category-name-small">
+                                Food
+                            </div>
+
+                            <div class="percentage">
+                                39.3% of total
+                            </div>
+
+                        </div>
+
+                        <div class="category-amount">
+                            ₹7,250.00
+                        </div>
+
+                    </div>
+
+
+                    <!-- Transport -->
+
+                    <div class="category">
+
+                        <div class="category-icon">
+                            🚌
+                        </div>
+
+                        <div class="category-info">
+
+                            <div class="category-name-small">
+                                Transport
+                            </div>
+
+                            <div class="percentage">
+                                17.3% of total
+                            </div>
+
+                        </div>
+
+                        <div class="category-amount">
+                            ₹3,200.00
+                        </div>
+
+                    </div>
+
+
+                    <!-- Shopping -->
+
+                    <div class="category">
+
+                        <div class="category-icon">
+                            🛍
+                        </div>
+
+                        <div class="category-info">
+
+                            <div class="category-name-small">
+                                Shopping
+                            </div>
+
+                            <div class="percentage">
+                                29.3% of total
+                            </div>
+
+                        </div>
+
+                        <div class="category-amount">
+                            ₹5,400.00
+                        </div>
+
+                    </div>
+
+
+                    <!-- Entertainment -->
+
+                    <div class="category">
+
+                        <div class="category-icon">
+                            🎬
+                        </div>
+
+                        <div class="category-info">
+
+                            <div class="category-name-small">
+                                Entertainment
+                            </div>
+
+                            <div class="percentage">
+                                14.1% of total
+                            </div>
+
+                        </div>
+
+                        <div class="category-amount">
+                            ₹2,600.00
+                        </div>
+
+                    </div>
+
+
+                    <!-- Total -->
+
+                    <div class="total-line">
+
+                        <span>
+                            Total this month
+                        </span>
+
+                        <strong>
+                            ₹18,450.00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT TRANSACTIONS -->
+
+                <div class="panel">
+
+                    <div class="transaction-heading">
+
+                        <div>
+
+                            <div class="panel-heading">
+                                Recent Transactions
+                            </div>
+
+                            <div class="panel-subtitle">
+                                Your 5 latest expenses this month
+                            </div>
+
+                        </div>
+
+                        <div class="entries">
+                            5 entries
+                        </div>
+
+                    </div>
+
+
+                    <!-- Transaction 1 -->
+
+                    <div class="transaction">
+
+                        <div class="transaction-icon">
+                            🍴
+                        </div>
+
+                        <div class="transaction-info">
+
+                            <div class="transaction-name">
+                                Weekly groceries
+                            </div>
+
+                            <div class="transaction-date">
+                                06 Oct 2026 · Food
+                            </div>
+
+                        </div>
+
+                        <div class="transaction-amount">
+                            ₹1,250.00
+                        </div>
+
+                    </div>
+
+
+                    <!-- Transaction 2 -->
+
+                    <div class="transaction">
+
+                        <div class="transaction-icon">
+                            🚌
+                        </div>
+
+                        <div class="transaction-info">
+
+                            <div class="transaction-name">
+                                Metro recharge
+                            </div>
+
+                            <div class="transaction-date">
+                                05 Oct 2026 · Transport
+                            </div>
+
+                        </div>
+
+                        <div class="transaction-amount">
+                            ₹180.00
+                        </div>
+
+                    </div>
+
+
+                    <!-- Transaction 3 -->
+
+                    <div class="transaction">
+
+                        <div class="transaction-icon">
+                            🛍
+                        </div>
+
+                        <div class="transaction-info">
+
+                            <div class="transaction-name">
+                                Everyday sneakers
+                            </div>
+
+                            <div class="transaction-date">
+                                04 Oct 2026 · Shopping
+                            </div>
+
+                        </div>
+
+                        <div class="transaction-amount">
+                            ₹1,600.00
+                        </div>
+
+                    </div>
+
+
+                    <!-- Transaction 4 -->
+
+                    <div class="transaction">
+
+                        <div class="transaction-icon">
+                            🍴
+                        </div>
+
+                        <div class="transaction-info">
+
+                            <div class="transaction-name">
+                                Lunch with friends
+                            </div>
+
+                            <div class="transaction-date">
+                                03 Oct 2026 · Food
+                            </div>
+
+                        </div>
+
+                        <div class="transaction-amount">
+                            ₹290.00
+                        </div>
+
+                    </div>
+
+
+                    <!-- Transaction 5 -->
+
+                    <div class="transaction">
+
+                        <div class="transaction-icon">
+                            🎬
+                        </div>
+
+                        <div class="transaction-info">
+
+                            <div class="transaction-name">
+                                Movie night
+                            </div>
+
+                            <div class="transaction-date">
+                                02 Oct 2026 · Entertainment
+                            </div>
+
+                        </div>
+
+                        <div class="transaction-amount">
+                            ₹200.00
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="footer">
+
+                <span>
+                    Small habits. A clearer picture of your spending.
+                </span>
+
+                <span>
+                    All amounts in INR · October 2026
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
